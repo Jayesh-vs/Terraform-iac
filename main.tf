@@ -187,19 +187,3 @@ resource "aws_eks_node_group" "devopsshack" {
     source_security_group_ids = [aws_security_group.devopsshack_node_sg.id]
   }
 }
-
-############################
-# EBS CSI ADD-ON
-############################
-
-resource "aws_eks_addon" "ebs_csi_driver" {
-  cluster_name = aws_eks_cluster.devopsshack.name
-  addon_name   = "aws-ebs-csi-driver"
-
-  resolve_conflicts_on_create = "OVERWRITE"
-  resolve_conflicts_on_update = "OVERWRITE"
-
-  depends_on = [
-    aws_eks_node_group.devopsshack
-  ]
-}
